@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const LoginPage = () => {
   const [username, setUsername] = useState<string>("");
@@ -42,7 +43,15 @@ const LoginPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 font-sans dark:bg-black">
       <div className="flex w-full max-w-sm flex-col items-center justify-center">
-        <h1 className="text-center text-4xl font-bold">Login</h1>
+        <Image
+          src="/briteeducation-logo.png"
+          alt="BriteStore logo"
+          width={96}
+          height={96}
+          className="mb-3 h-20 w-20 rounded-full object-cover"
+        />
+        <h1 className="text-center text-4xl font-bold">BriteStore</h1>
+        <p className="mt-1 text-center text-sm font-medium text-slate-600">Sign in</p>
         <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
           Use Fake Store test user:
           <br />

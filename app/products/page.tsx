@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 type Product = {
   id: number;
@@ -64,7 +65,16 @@ const ProductsPage = () => {
       <div className="mx-auto w-full max-w-7xl">
         <div className="mb-8">
           <div className="mb-4 flex items-center justify-between gap-3">
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Fake Store</h1>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/briteeducation-logo.png"
+                alt="BriteStore logo"
+                width={56}
+                height={56}
+                className="h-12 w-12 rounded-full object-cover"
+              />
+              <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">BriteStore</h1>
+            </div>
             <button
               type="button"
               onClick={async () => {

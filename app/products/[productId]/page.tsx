@@ -67,7 +67,16 @@ const ProductPage = async ({
 
   return (
     <main className="mx-auto max-w-4xl p-6">
-      <h1 className="mb-6 text-3xl font-bold text-slate-900">Product Details</h1>
+      <div className="mb-6 flex items-center gap-3">
+        <Image
+          src="/briteeducation-logo.png"
+          alt="BriteStore logo"
+          width={48}
+          height={48}
+          className="h-11 w-11 rounded-full object-cover"
+        />
+        <h1 className="text-3xl font-bold text-slate-900">BriteStore Product Details</h1>
+      </div>
       <article className="grid gap-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-2">
         <div className="flex items-center justify-center rounded-lg bg-slate-100 p-6">
           <Image
