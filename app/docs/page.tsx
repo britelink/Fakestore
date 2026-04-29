@@ -23,19 +23,27 @@ export default function DocsPage() {
         <ul className="list-disc space-y-1 pl-5 text-slate-700">
           <li>Go to <code>/products</code> after login.</li>
           <li>Filter by category.</li>
-          <li>Open details page from "More Details".</li>
+          <li>Open details page from &quot;More Details&quot;.</li>
         </ul>
       </section>
 
       <section className="mt-6 space-y-4 rounded-xl border border-slate-200 bg-white p-6">
         <h2 className="text-xl font-semibold text-slate-900">3) Test API endpoints</h2>
         <ul className="list-disc space-y-1 pl-5 text-slate-700">
-          <li><code>GET /api/products</code></li>
-          <li><code>GET /api/products/1</code></li>
-          <li><code>GET /api/cart</code></li>
-          <li><code>GET /api/cart/1</code></li>
-          <li><code>POST /api/cart</code> with userId/date/products body</li>
+          <li><code>GET/POST /api/products</code></li>
+          <li><code>GET/PUT/DELETE /api/products/:productId</code></li>
+          <li><code>GET/POST /api/cart</code></li>
+          <li><code>GET/PUT/DELETE /api/cart/:cartId</code></li>
+          <li><code>GET/POST /api/users</code></li>
+          <li><code>GET/PUT/DELETE /api/users/:userId</code></li>
         </ul>
+      </section>
+
+      <section className="mt-6 space-y-4 rounded-xl border border-slate-200 bg-white p-6">
+        <h2 className="text-xl font-semibold text-slate-900">4) Use the in-app API Playground</h2>
+        <p className="text-slate-700">
+          Open <code>/playground</code> to run all endpoints with ready-made templates.
+        </p>
       </section>
 
       <div className="mt-8 flex gap-3">
@@ -50,6 +58,12 @@ export default function DocsPage() {
           className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         >
           Go Login
+        </Link>
+        <Link
+          href="/playground"
+          className="rounded-md border border-slate-300 bg-white px-4 py-2 text-slate-700 hover:bg-slate-100"
+        >
+          Open Playground
         </Link>
       </div>
     </main>

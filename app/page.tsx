@@ -30,6 +30,12 @@ export default function Home() {
           >
             How to Test This App
           </Link>
+          <Link
+            href="/playground"
+            className="rounded-md border border-slate-300 bg-white px-5 py-2.5 font-medium text-slate-700 transition hover:bg-slate-100"
+          >
+            API Playground
+          </Link>
         </div>
       </div>
     </main>
