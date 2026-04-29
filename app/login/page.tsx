@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [username, setUsername] = useState<string>("mor_2314");
+  const [password, setPassword] = useState<string>("83r5^_");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [debugMessage, setDebugMessage] = useState<string>("");
@@ -18,9 +18,25 @@ const LoginPage = () => {
       setIsSubmitting(true);
       setError(null);
       setDebugMessage("");
+      let normalizedUsername = username.trim();
+      let normalizedPassword = password.trim();
+
+      // Support accidental paste like: "mor_2314 / 83r5^_" in username field.
+      if (!normalizedPassword && normalizedUsername.includes("/")) {
+        const [maybeUser, maybePass] = normalizedUsername
+          .split("/")
+          .map((part) => part.trim());
+        if (maybeUser && maybePass) {
+          normalizedUsername = maybeUser;
+          normalizedPassword = maybePass;
+          setUsername(maybeUser);
+          setPassword(maybePass);
+        }
+      }
+
       const payload = {
-        username: username.trim(),
-        password: password.trim(),
+        username: normalizedUsername,
+        password: normalizedPassword,
       };
       console.log("[frontend-login] sending payload", {
         username: payload.username,
