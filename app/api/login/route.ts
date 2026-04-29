@@ -54,9 +54,19 @@ export async function POST(req: NextRequest) {
       cache: "no-store",
     });
 
-    const data = await authResponse.json();
+    let data: unknown = null;
+    try {
+      data = await authResponse.json();
+    } catch {
+      data = null;
+    }
 
-    if (!authResponse.ok || typeof data?.token !== "string") {
+    const token =
+      data && typeof data === "object" && "token" in data && typeof data.token === "string"
+        ? data.token
+        : "";
+
+    if (!authResponse.ok || !token) {
       return NextResponse.json(
         { message: "Invalid username or password." },
         { status: 401 },
@@ -64,7 +74,7 @@ export async function POST(req: NextRequest) {
     }
 
     const response = NextResponse.json({ success: true }, { status: 200 });
-    response.cookies.set("fakeStoreToken", data.token, {
+    response.cookies.set("fakeStoreToken", token, {
       httpOnly: true,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",

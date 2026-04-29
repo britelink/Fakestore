@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![BRITEEDUCATION Logo](public/briteeducation-logo.png)
 
-## Getting Started
+# BRITEEDUCATION Academic Codebase Demo
 
-First, run the development server:
+This repository is an academic demo project for BRITEEDUCATION School of Technology.
+It showcases a modern `Next.js` app with:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Route handlers (`app/api/...`) for backend API logic
+- Cookie-based auth flow using Fake Store API tokens
+- Protected pages using middleware
+- PostgreSQL-ready database integration with `pg` and Prisma schema setup
+
+## Project Purpose
+
+This codebase is designed for students to practice:
+
+- Building full-stack features in the App Router architecture
+- Designing API endpoints with clear validation and error handling
+- Connecting external APIs (Fake Store API) with local app flows
+- Preparing a production-ready database layer
+
+## Tech Stack
+
+- `Next.js` (App Router)
+- `TypeScript`
+- `PostgreSQL` via `pg`
+- `Prisma` schema and generated client
+- External API: [Fake Store API](https://fakestoreapi.com/)
+
+## API Design Principles Used
+
+- **Clear HTTP methods**
+  - `POST` for login/register actions
+  - `GET` for product retrieval
+  - `DELETE` for logout (cookie cleanup)
+- **Header validation**
+  - JSON endpoints require `Content-Type: application/json`
+- **Input validation**
+  - Required fields are checked before any upstream request
+- **Consistent status codes**
+  - `200` success, `201` created, `400` bad request, `401` unauthorized, `500/502` server/upstream errors
+- **Secure cookie handling**
+  - Token stored in `httpOnly` cookie (`fakeStoreToken`) with `sameSite` and `secure` rules
+
+## API Endpoints
+
+- `POST /api/register`
+  - Registers a user through Fake Store API (`/users`)
+  - Expects JSON body: `email`, `password`, and optional `username` / `name`
+- `POST /api/login`
+  - Authenticates with Fake Store API (`/auth/login`)
+  - Expects JSON body: `username`, `password`
+  - Saves token in `fakeStoreToken` cookie
+- `DELETE /api/login`
+  - Logs out by clearing the auth cookie
+- `GET /api/products`
+  - Requires `fakeStoreToken` cookie
+  - Proxies and returns products from Fake Store API (`/products`)
+
+## Auth and Route Protection
+
+- `middleware.ts` protects `/products` routes
+- Unauthenticated users are redirected to `/login`
+- Logged-in users visiting `/login` are redirected to `/products`
+
+## Database Notes
+
+- `lib/db.ts` creates a PostgreSQL connection pool from `DATABASE_URL`
+- `prisma/schema.prisma` includes a starter `User` model
+- This setup demonstrates how to combine external API data with your own DB-backed entities
+
+## Environment Variables
+
+Create a `.env` file:
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DB_NAME"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run the Project (Students)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Choose **one** package manager.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Option 1: Bun
 
-## Learn More
+```bash
+bun install
+bun run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Option 2: npm
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Then open [http://localhost:3000](http://localhost:3000).
 
-## Deploy on Vercel
+## Useful Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `dev` - start development server
+- `build` - create production build
+- `start` - run production server
+- `lint` - run ESLint
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Suggested Academic Demo Flow
+
+1. Register a user from the UI.
+2. Log in to create the auth cookie.
+3. Access `/products` (protected route).
+4. Inspect `/api/products` response and discuss API design choices.
+5. Extend DB usage by storing user/session metadata locally.
