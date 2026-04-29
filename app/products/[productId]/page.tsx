@@ -1,6 +1,7 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Image from "next/image";
+import AddToCartButton from "./AddToCartButton";
 
 type Product = {
   id: number;
@@ -94,6 +95,7 @@ const ProductPage = async ({
           <h2 className="mb-3 text-2xl font-semibold text-slate-900">{product.title}</h2>
           <p className="mb-4 text-slate-600">{product.description}</p>
           <p className="text-xl font-bold text-slate-900">${product.price.toFixed(2)}</p>
+          <AddToCartButton productId={product.id} className="mt-5" />
         </div>
       </article>
     </main>
