@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [debugMessage, setDebugMessage] = useState<string>("");
 
   const router = useRouter();
 
@@ -16,16 +17,28 @@ const LoginPage = () => {
     try {
       setIsSubmitting(true);
       setError(null);
+      setDebugMessage("");
+      const payload = {
+        username: username.trim(),
+        password: password.trim(),
+      };
+      console.log("[frontend-login] sending payload", {
+        username: payload.username,
+        usernameLength: payload.username.length,
+        passwordLength: payload.password.length,
+        hasLeadingOrTrailingSpaces: password !== password.trim(),
+      });
       const response = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username.trim(),
-          password,
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
+      console.log("[frontend-login] response", { status: response.status, data });
+      setDebugMessage(
+        `debug: status=${response.status}, userLen=${payload.username.length}, passLen=${payload.password.length}`,
+      );
 
       if (!response.ok) {
         setError(data?.message ?? "Login failed.");
@@ -78,6 +91,7 @@ const LoginPage = () => {
           />
 
           {error ? <p className="w-full text-sm text-red-600">{error}</p> : null}
+          {debugMessage ? <p className="w-full text-xs text-slate-500">{debugMessage}</p> : null}
 
           <button
             className="w-full cursor-pointer rounded-md bg-blue-500 px-4 py-2 text-white transition-all duration-300 hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-60"
