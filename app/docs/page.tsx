@@ -1,11 +1,13 @@
 import Link from "next/link";
+import AppNav from "@/app/components/AppNav";
 
 export default function DocsPage() {
   return (
     <main className="mx-auto min-h-screen w-full max-w-3xl px-4 py-10">
+      <AppNav />
       <h1 className="text-3xl font-bold text-slate-900">BriteStore Testing Docs</h1>
       <p className="mt-2 text-slate-600">
-        Follow these steps to test login, products, and cart endpoints.
+        Follow these steps to test login, products, and carts endpoints.
       </p>
 
       <section className="mt-8 space-y-4 rounded-xl border border-slate-200 bg-white p-6">
@@ -32,8 +34,8 @@ export default function DocsPage() {
         <ul className="list-disc space-y-1 pl-5 text-slate-700">
           <li><code>GET/POST /api/products</code></li>
           <li><code>GET/PUT/DELETE /api/products/:productId</code></li>
-          <li><code>GET/POST /api/cart</code></li>
-          <li><code>GET/PUT/DELETE /api/cart/:cartId</code></li>
+          <li><code>GET/POST /api/carts</code></li>
+          <li><code>GET/PUT/DELETE /api/carts/:cartId</code></li>
           <li><code>GET/POST /api/users</code></li>
           <li><code>GET/PUT/DELETE /api/users/:userId</code></li>
         </ul>
@@ -64,6 +66,12 @@ export default function DocsPage() {
           className="rounded-md border border-slate-300 bg-white px-4 py-2 text-slate-700 hover:bg-slate-100"
         >
           Open Playground
+        </Link>
+        <Link
+          href="/api-lab"
+          className="rounded-md border border-slate-300 bg-white px-4 py-2 text-slate-700 hover:bg-slate-100"
+        >
+          Open API Lab
         </Link>
       </div>
     </main>

@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import AppNav from '@/app/components/AppNav';
 
 type Product = {
   id: number;
@@ -63,6 +64,7 @@ const ProductsPage = () => {
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
+        <AppNav />
         <div className="mb-8">
           <div className="mb-4 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
@@ -139,11 +141,12 @@ const ProductsPage = () => {
                     className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md"
                   >
                     <div className="mb-4 flex h-44 items-center justify-center rounded-xl bg-slate-100 p-4">
-                      <img
+                      <Image
                         src={product.image}
                         alt={product.title}
+                        width={220}
+                        height={220}
                         className="h-full max-h-36 w-auto object-contain"
-                        loading="lazy"
                       />
                     </div>
                     <p className="mb-2 line-clamp-1 text-xs font-medium uppercase tracking-wide text-slate-500">

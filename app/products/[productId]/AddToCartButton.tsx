@@ -18,11 +18,10 @@ export default function AddToCartButton({ productId, className }: AddToCartButto
     setMessage("");
 
     try {
-      // Fake Store demo user id that is known to exist.
       const demoUserId = 2;
       const today = new Date().toISOString().slice(0, 10);
 
-      const response = await fetch("/api/cart", {
+      const response = await fetch("/api/carts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PROTECTED_PATHS = ["/products"];
+const PROTECTED_PATHS = ["/products", "/playground", "/api"];
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const token = req.cookies.get("fakeStoreToken")?.value;
   const { pathname } = req.nextUrl;
 
@@ -24,5 +24,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/products/:path*", "/login"],
+  matcher: ["/products/:path*", "/playground/:path*", "/api/:path*", "/login"],
 };

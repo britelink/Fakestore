@@ -2,6 +2,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import AddToCartButton from "./AddToCartButton";
+import AppNav from "@/app/components/AppNav";
 
 type Product = {
   id: number;
@@ -68,6 +69,7 @@ const ProductPage = async ({
 
   return (
     <main className="mx-auto max-w-4xl p-6">
+      <AppNav />
       <div className="mb-6 flex items-center gap-3">
         <Image
           src="/briteeducation-logo.png"

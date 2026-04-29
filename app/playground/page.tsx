@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import AppNav from "@/app/components/AppNav";
 
 const endpointTemplates = [
   { label: "GET products", value: "/api/products", method: "GET" },
@@ -8,11 +9,11 @@ const endpointTemplates = [
   { label: "GET product by id", value: "/api/products/1", method: "GET" },
   { label: "PUT product by id", value: "/api/products/1", method: "PUT" },
   { label: "DELETE product by id", value: "/api/products/1", method: "DELETE" },
-  { label: "GET carts", value: "/api/cart", method: "GET" },
-  { label: "POST cart", value: "/api/cart", method: "POST" },
-  { label: "GET cart by id", value: "/api/cart/1", method: "GET" },
-  { label: "PUT cart by id", value: "/api/cart/1", method: "PUT" },
-  { label: "DELETE cart by id", value: "/api/cart/1", method: "DELETE" },
+  { label: "GET carts", value: "/api/carts", method: "GET" },
+  { label: "POST cart", value: "/api/carts", method: "POST" },
+  { label: "GET cart by id", value: "/api/carts/1", method: "GET" },
+  { label: "PUT cart by id", value: "/api/carts/1", method: "PUT" },
+  { label: "DELETE cart by id", value: "/api/carts/1", method: "DELETE" },
   { label: "GET users", value: "/api/users", method: "GET" },
   { label: "POST user", value: "/api/users", method: "POST" },
   { label: "GET user by id", value: "/api/users/1", method: "GET" },
@@ -43,7 +44,7 @@ const defaultBodies: Record<string, string> = {
     null,
     2,
   ),
-  "POST /api/cart": JSON.stringify(
+  "POST /api/carts": JSON.stringify(
     {
       userId: 2,
       date: "2026-04-29",
@@ -52,7 +53,7 @@ const defaultBodies: Record<string, string> = {
     null,
     2,
   ),
-  "PUT /api/cart/1": JSON.stringify(
+  "PUT /api/carts/1": JSON.stringify(
     {
       userId: 2,
       date: "2026-04-29",
@@ -125,6 +126,7 @@ export default function PlaygroundPage() {
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-5xl px-4 py-8">
+      <AppNav />
       <h1 className="text-3xl font-bold text-slate-900">BriteStore API Playground</h1>
       <p className="mt-2 text-slate-600">
         Test all Fake Store proxy endpoints from one screen. Login first so protected routes work.
